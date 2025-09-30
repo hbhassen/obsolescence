@@ -9,6 +9,7 @@ Ce document décrit les fonctionnalités ajoutées pour répondre aux besoins de
   - `DefaultGithubScannerService` (API GitHub REST v3).
   - `DefaultGitlabScannerService` (API GitLab v4).
 - La propriété `dashboard.sources.enabled-providers` permet d'activer l'une ou l'autre forge (`github`, `gitlab`) ou les deux simultanément (valeur séparée par des virgules).
+- Un argument de lancement (`--providers` ou `--scm-providers`) peut surcharger dynamiquement cette sélection pour un run donné.
 
 ## Configuration Git Flow externalisée
 

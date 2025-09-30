@@ -4,7 +4,9 @@ import com.example.dashboardradar.config.SourceControlProperties;
 import com.example.dashboardradar.model.ProjectSnapshot;
 import com.example.dashboardradar.service.PlatformProjectScanner;
 import com.example.dashboardradar.service.ProjectScanner;
+import com.example.dashboardradar.service.ProviderSelectionManager;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -24,20 +26,26 @@ public class CompositeProjectScannerService implements ProjectScanner {
 
     private final Map<String, PlatformProjectScanner> scannersByProvider;
     private final SourceControlProperties properties;
+    private final ProviderSelectionManager providerSelectionManager;
 
-    public CompositeProjectScannerService(List<PlatformProjectScanner> scanners, SourceControlProperties properties) {
+    public CompositeProjectScannerService(List<PlatformProjectScanner> scanners,
+            SourceControlProperties properties,
+            ProviderSelectionManager providerSelectionManager) {
         this.scannersByProvider = scanners.stream()
                 .collect(Collectors.toMap(scanner -> scanner.provider().toLowerCase(Locale.ROOT), Function.identity()));
         this.properties = properties;
+        this.providerSelectionManager = providerSelectionManager;
     }
 
     @Override
     public List<ProjectSnapshot> fetchProjects() {
-        Set<String> enabledProviders = properties.enabledProviders().isEmpty()
-                ? scannersByProvider.keySet()
-                : properties.enabledProviders().stream()
-                        .map(provider -> provider.toLowerCase(Locale.ROOT))
-                        .collect(Collectors.toSet());
+        Set<String> enabledProviders = providerSelectionManager.getSelectedProviders()
+                .filter(selected -> !selected.isEmpty())
+                .orElseGet(() -> properties.enabledProviders().isEmpty()
+                        ? scannersByProvider.keySet()
+                        : properties.enabledProviders().stream()
+                                .map(provider -> provider.toLowerCase(Locale.ROOT))
+                                .collect(Collectors.toCollection(LinkedHashSet::new)));
 
         List<ProjectSnapshot> aggregated = new ArrayList<>();
         for (String provider : enabledProviders) {
