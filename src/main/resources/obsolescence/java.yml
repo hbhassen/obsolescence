@@ -1,0 +1,113 @@
+frameworks:
+  spring-framework:
+    component: spring-framework
+    minimum-version: "6.0.0"
+    latest-version: "6.1.14"
+    deprecated-before: 2024-12-31
+    end-of-support: 2026-12-31
+    severity: MAJOR
+  spring-boot:
+    component: spring-boot
+    minimum-version: "3.2.0"
+    latest-version: "3.5.6"
+    deprecated-before: 2025-01-01
+    end-of-support: 2027-01-01
+    severity: CRITICAL
+  spring-cloud:
+    component: spring-cloud
+    minimum-version: "2023.0.0"
+    latest-version: "2023.0.4"
+    deprecated-before: 2025-06-30
+    end-of-support: 2027-06-30
+    severity: MAJOR
+  hibernate-orm:
+    component: hibernate-orm
+    minimum-version: "6.2.0"
+    latest-version: "6.6.1"
+    deprecated-before: 2024-10-01
+    end-of-support: 2026-10-01
+    severity: MAJOR
+  jakarta-ee:
+    component: jakarta-ee
+    minimum-version: "10.0.0"
+    latest-version: "10.0.2"
+    deprecated-before: 2025-09-30
+    end-of-support: 2027-09-30
+    severity: CRITICAL
+  wildfly:
+    component: wildfly
+    minimum-version: "28.0.0"
+    latest-version: "34.0.0"
+    deprecated-before: 2024-12-31
+    end-of-support: 2026-12-31
+    severity: MAJOR
+  ejb:
+    component: ejb
+    minimum-version: "4.0.0"
+    latest-version: "4.0.2"
+    deprecated-before: 2024-12-31
+    end-of-support: 2026-12-31
+    severity: MAJOR
+  apache-tomcat:
+    component: apache-tomcat
+    minimum-version: "10.1.0"
+    latest-version: "10.1.30"
+    deprecated-before: 2025-01-01
+    end-of-support: 2026-12-31
+    severity: MAJOR
+  quarkus:
+    component: quarkus
+    minimum-version: "3.8.0"
+    latest-version: "3.17.1"
+    deprecated-before: 2025-08-31
+    end-of-support: 2027-08-31
+    severity: MAJOR
+  micronaut:
+    component: micronaut
+    minimum-version: "4.0.0"
+    latest-version: "4.5.0"
+    deprecated-before: 2025-05-31
+    end-of-support: 2027-05-31
+    severity: MAJOR
+  dropwizard:
+    component: dropwizard
+    minimum-version: "3.0.0"
+    latest-version: "4.0.0"
+    deprecated-before: 2024-09-30
+    end-of-support: 2026-09-30
+    severity: MODERATE
+  apache-struts:
+    component: apache-struts
+    minimum-version: "2.6.0"
+    latest-version: "6.4.0"
+    deprecated-before: 2024-03-31
+    end-of-support: 2025-12-31
+    severity: CRITICAL
+  jsf:
+    component: jsf
+    minimum-version: "4.0.0"
+    latest-version: "4.0.2"
+    deprecated-before: 2025-02-28
+    end-of-support: 2026-12-31
+    severity: MAJOR
+  jersey:
+    component: jersey
+    minimum-version: "3.1.0"
+    latest-version: "3.1.8"
+    deprecated-before: 2025-04-30
+    end-of-support: 2027-04-30
+    severity: MODERATE
+  play-framework:
+    component: play-framework
+    minimum-version: "2.9.0"
+    latest-version: "2.9.5"
+    deprecated-before: 2025-07-31
+    end-of-support: 2027-07-31
+    severity: MODERATE
+  grails:
+    component: grails
+    minimum-version: "5.3.0"
+    latest-version: "6.0.0"
+    deprecated-before: 2024-11-30
+    end-of-support: 2026-11-30
+    severity: MAJOR

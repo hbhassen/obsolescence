@@ -58,22 +58,4 @@ dashboard:
         allowed-languages:
           - typescript
   obsolescence:
-    components:
-      spring-boot:
-        component: spring-boot
-        minimum-version: 3.0.0
-        deprecated-before: 2024-01-01
-        end-of-support: 2025-12-31
-        severity: MAJOR
-      java:
-        component: java
-        minimum-version: 17
-        deprecated-before: 2023-09-01
-        end-of-support: 2026-09-01
-        severity: CRITICAL
-      angular:
-        component: @angular/cli
-        minimum-version: 15.0.0
-        deprecated-before: 2024-05-01
-        end-of-support: 2025-05-01
-        severity: MINOR
+    matrix-base-path: classpath:obsolescence

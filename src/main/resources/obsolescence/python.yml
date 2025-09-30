@@ -1,0 +1,64 @@
+frameworks:
+  django:
+    component: django
+    minimum-version: "4.2.0"
+    latest-version: "5.1.2"
+    deprecated-before: 2025-04-01
+    end-of-support: 2027-04-01
+    severity: CRITICAL
+  flask:
+    component: flask
+    minimum-version: "2.3.0"
+    latest-version: "3.0.3"
+    deprecated-before: 2024-09-01
+    end-of-support: 2026-09-01
+    severity: MAJOR
+  fastapi:
+    component: fastapi
+    minimum-version: "0.110.0"
+    latest-version: "0.115.0"
+    deprecated-before: 2025-05-01
+    end-of-support: 2027-05-01
+    severity: MAJOR
+  pyramid:
+    component: pyramid
+    minimum-version: "2.0.0"
+    latest-version: "2.0.2"
+    deprecated-before: 2024-12-01
+    end-of-support: 2026-12-01
+    severity: MODERATE
+  tornado:
+    component: tornado
+    minimum-version: "6.3.0"
+    latest-version: "6.4.1"
+    deprecated-before: 2024-10-01
+    end-of-support: 2026-10-01
+    severity: MODERATE
+  celery:
+    component: celery
+    minimum-version: "5.3.0"
+    latest-version: "5.4.0"
+    deprecated-before: 2024-11-01
+    end-of-support: 2026-11-01
+    severity: MAJOR
+  sqlalchemy:
+    component: sqlalchemy
+    minimum-version: "2.0.0"
+    latest-version: "2.0.35"
+    deprecated-before: 2025-02-01
+    end-of-support: 2027-02-01
+    severity: MAJOR
+  numpy:
+    component: numpy
+    minimum-version: "1.25.0"
+    latest-version: "2.1.1"
+    deprecated-before: 2024-08-01
+    end-of-support: 2026-08-01
+    severity: MODERATE
+  pandas:
+    component: pandas
+    minimum-version: "2.0.0"
+    latest-version: "2.2.3"
+    deprecated-before: 2024-09-01
+    end-of-support: 2026-09-01
+    severity: MODERATE
