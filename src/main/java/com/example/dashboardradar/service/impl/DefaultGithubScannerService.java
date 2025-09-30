@@ -10,6 +10,7 @@ import com.example.dashboardradar.util.GradleFrameworkExtractor;
 import com.example.dashboardradar.util.PackageJsonFrameworkExtractor;
 import com.example.dashboardradar.util.XmlFrameworkExtractor;
 import com.example.dashboardradar.service.MetadataAnalyzerService;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 import java.util.Base64;
 import java.util.List;
@@ -89,7 +90,7 @@ public class DefaultGithubScannerService implements PlatformProjectScanner {
                 .map(branch -> new BranchSnapshot(
                         branch.name(),
                         Objects.equals(branch.name(), repo.default_branch()),
-                        branch.@protected(),
+                        branch.isProtected(),
                         branch.commit() != null && branch.commit().commit() != null
                                 ? branch.commit().commit().author().date()
                                 : null
@@ -200,7 +201,7 @@ public class DefaultGithubScannerService implements PlatformProjectScanner {
     private record GithubUser(String login) {
     }
 
-    private record GithubBranch(String name, boolean @protected, GithubBranchCommit commit) {
+    private record GithubBranch(String name, @JsonProperty("protected") boolean isProtected, GithubBranchCommit commit) {
     }
 
     private record GithubBranchCommit(GithubCommit commit) {

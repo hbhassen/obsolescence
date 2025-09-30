@@ -10,6 +10,7 @@ import com.example.dashboardradar.service.PlatformProjectScanner;
 import com.example.dashboardradar.util.GradleFrameworkExtractor;
 import com.example.dashboardradar.util.PackageJsonFrameworkExtractor;
 import com.example.dashboardradar.util.XmlFrameworkExtractor;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
@@ -90,7 +91,7 @@ public class DefaultGitlabScannerService implements PlatformProjectScanner {
                 .map(branch -> new BranchSnapshot(
                         branch.name(),
                         Objects.equals(branch.name(), project.default_branch()),
-                        branch.@protected(),
+                        branch.isProtected(),
                         branch.commit() != null ? branch.commit().committed_date() : null
                 ))
                 .collectList()
@@ -217,7 +218,7 @@ public class DefaultGitlabScannerService implements PlatformProjectScanner {
     private record GitlabNamespace(String full_path) {
     }
 
-    private record GitlabBranch(String name, boolean @protected, GitlabBranchCommit commit) {
+    private record GitlabBranch(String name, @JsonProperty("protected") boolean isProtected, GitlabBranchCommit commit) {
     }
 
     private record GitlabBranchCommit(OffsetDateTime committed_date) {
