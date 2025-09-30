@@ -1,0 +1,29 @@
+frameworks:
+  nodejs:
+    component: nodejs
+    minimum-version: "18.0.0"
+    latest-version: "22.9.0"
+    deprecated-before: 2024-10-01
+    end-of-support: 2026-10-01
+    severity: CRITICAL
+  angular:
+    component: @angular/core
+    minimum-version: "16.0.0"
+    latest-version: "18.2.5"
+    deprecated-before: 2024-12-31
+    end-of-support: 2026-12-31
+    severity: CRITICAL
+  angular-cli:
+    component: @angular/cli
+    minimum-version: "16.0.0"
+    latest-version: "18.2.5"
+    deprecated-before: 2024-12-31
+    end-of-support: 2026-12-31
+    severity: CRITICAL
+  rxjs:
+    component: rxjs
+    minimum-version: "7.8.0"
+    latest-version: "7.8.1"
+    deprecated-before: 2024-08-01
+    end-of-support: 2026-08-01
+    severity: MAJOR
