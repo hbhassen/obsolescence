@@ -5,7 +5,7 @@ import com.example.dashboardradar.model.BranchSnapshot;
 import com.example.dashboardradar.model.MergeRequestSnapshot;
 import com.example.dashboardradar.model.ProjectSnapshot;
 import com.example.dashboardradar.model.RepositoryStructure;
-import com.example.dashboardradar.service.GithubScannerService;
+import com.example.dashboardradar.service.PlatformProjectScanner;
 import com.example.dashboardradar.util.GradleFrameworkExtractor;
 import com.example.dashboardradar.util.PackageJsonFrameworkExtractor;
 import com.example.dashboardradar.util.XmlFrameworkExtractor;
@@ -25,7 +25,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 
 @Service
-public class DefaultGithubScannerService implements GithubScannerService {
+public class DefaultGithubScannerService implements PlatformProjectScanner {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultGithubScannerService.class);
     private final WebClient client;
@@ -60,6 +60,11 @@ public class DefaultGithubScannerService implements GithubScannerService {
                 .collectList()
                 .blockOptional()
                 .orElse(List.of());
+    }
+
+    @Override
+    public String provider() {
+        return "github";
     }
 
     private List<GithubRepository> fetchRepositories() {
