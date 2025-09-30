@@ -5,9 +5,9 @@ import com.example.dashboardradar.model.ObsolescenceReport;
 import com.example.dashboardradar.model.ProjectAudit;
 import com.example.dashboardradar.model.ProjectSnapshot;
 import com.example.dashboardradar.service.ComplianceCheckerService;
-import com.example.dashboardradar.service.GithubScannerService;
 import com.example.dashboardradar.service.ObsolescenceDetectorService;
 import com.example.dashboardradar.service.PersistenceService;
+import com.example.dashboardradar.service.ProjectScanner;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,16 +22,16 @@ public class AuditTasklet implements Tasklet {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuditTasklet.class);
 
-    private final GithubScannerService githubScannerService;
+    private final ProjectScanner projectScanner;
     private final ComplianceCheckerService complianceCheckerService;
     private final ObsolescenceDetectorService obsolescenceDetectorService;
     private final PersistenceService persistenceService;
 
-    public AuditTasklet(GithubScannerService githubScannerService,
+    public AuditTasklet(ProjectScanner projectScanner,
             ComplianceCheckerService complianceCheckerService,
             ObsolescenceDetectorService obsolescenceDetectorService,
             PersistenceService persistenceService) {
-        this.githubScannerService = githubScannerService;
+        this.projectScanner = projectScanner;
         this.complianceCheckerService = complianceCheckerService;
         this.obsolescenceDetectorService = obsolescenceDetectorService;
         this.persistenceService = persistenceService;
@@ -40,8 +40,8 @@ public class AuditTasklet implements Tasklet {
     @Override
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) {
         LOGGER.info("Starting dashboard radar audit batch");
-        List<ProjectSnapshot> projects = githubScannerService.fetchProjects();
-        LOGGER.info("Fetched {} projects from GitHub", projects.size());
+        List<ProjectSnapshot> projects = projectScanner.fetchProjects();
+        LOGGER.info("Fetched {} projects from configured SCM providers", projects.size());
         for (ProjectSnapshot snapshot : projects) {
             LOGGER.info("Processing project {}", snapshot.fullName());
             ComplianceReport compliance = complianceCheckerService.checkCompliance(snapshot);

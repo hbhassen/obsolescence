@@ -1,0 +1,144 @@
+dashboard:
+  structure:
+    stacks:
+      java-spring:
+        mandatory-paths:
+          - src/main/java
+          - src/main/resources
+          - src/test/java
+        ci-files:
+          - .github/workflows/build.yml
+          - Jenkinsfile
+          - .gitlab-ci.yml
+        forbidden-frameworks:
+          - org.springframework.boot:spring-boot-starter-parent:2.5.0
+        allowed-frameworks:
+          - org.springframework.boot:spring-boot-starter
+        allowed-languages:
+          - java
+      java-quarkus:
+        mandatory-paths:
+          - src/main/java
+          - src/main/resources
+        ci-files:
+          - .github/workflows/quarkus.yml
+          - .gitlab-ci.yml
+        allowed-frameworks:
+          - io.quarkus:quarkus-bom
+        allowed-languages:
+          - java
+          - kotlin
+      node-express:
+        mandatory-paths:
+          - src
+        ci-files:
+          - .github/workflows/node.yml
+          - .gitlab-ci.yml
+        allowed-frameworks:
+          - express
+        allowed-languages:
+          - javascript
+      angular:
+        mandatory-paths:
+          - src/app
+          - src/environments
+        ci-files:
+          - .gitlab-ci.yml
+          - .github/workflows/build.yml
+        forbidden-frameworks:
+          - @angular/cli@8
+          - @angular/cli@9
+        allowed-frameworks:
+          - @angular/cli
+        allowed-languages:
+          - typescript
+      react:
+        mandatory-paths:
+          - src
+          - public
+        ci-files:
+          - .github/workflows/react.yml
+          - .gitlab-ci.yml
+        allowed-frameworks:
+          - react
+        allowed-languages:
+          - javascript
+          - typescript
+      vue:
+        mandatory-paths:
+          - src
+        ci-files:
+          - .github/workflows/vue.yml
+          - .gitlab-ci.yml
+        allowed-frameworks:
+          - vue
+        allowed-languages:
+          - javascript
+          - typescript
+      python-django:
+        mandatory-paths:
+          - manage.py
+          - project
+        ci-files:
+          - .github/workflows/python.yml
+          - .gitlab-ci.yml
+        allowed-frameworks:
+          - django
+        allowed-languages:
+          - python
+      python-flask:
+        mandatory-paths:
+          - app.py
+        ci-files:
+          - .github/workflows/python.yml
+          - .gitlab-ci.yml
+        allowed-frameworks:
+          - flask
+        allowed-languages:
+          - python
+      dotnet:
+        mandatory-paths:
+          - src
+          - tests
+        ci-files:
+          - .github/workflows/dotnet.yml
+          - .gitlab-ci.yml
+          - azure-pipelines.yml
+        allowed-frameworks:
+          - microsoft.net.sdk
+        allowed-languages:
+          - c#
+      ruby-rails:
+        mandatory-paths:
+          - app
+          - config
+        ci-files:
+          - .github/workflows/ruby.yml
+          - .gitlab-ci.yml
+        allowed-frameworks:
+          - rails
+        allowed-languages:
+          - ruby
+      go:
+        mandatory-paths:
+          - cmd
+          - pkg
+        ci-files:
+          - .github/workflows/go.yml
+          - .gitlab-ci.yml
+        allowed-frameworks:
+          - go
+        allowed-languages:
+          - go
+      php-laravel:
+        mandatory-paths:
+          - app
+          - routes
+          - config
+        ci-files:
+          - .github/workflows/php.yml
+          - .gitlab-ci.yml
+        allowed-frameworks:
+          - laravel/framework
+        allowed-languages:
+          - php

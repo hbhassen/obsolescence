@@ -2,13 +2,14 @@
 
 ## Vue d'ensemble
 
-Dashboard Radar est une application batch Spring Boot 3 destinée à être exécutée quotidiennement (CronJob OpenShift) pour auditer les dépôts GitHub d'une organisation. L'application consomme l'API GitHub, applique des règles internes (structure de projet, standards Git Flow, matrice d'obsolescence) puis persiste les résultats dans PostgreSQL.
+Dashboard Radar est une application batch Spring Boot 3 destinée à être exécutée quotidiennement (CronJob OpenShift) pour auditer les dépôts GitHub **et GitLab** d'une organisation. L'application consomme les API REST GitHub/GitLab, applique des règles internes (structure de projet, standards Git Flow, matrice d'obsolescence) puis persiste les résultats dans PostgreSQL.
 
 ## Modules
 
 | Module | Description |
 | ------ | ----------- |
-| `GithubScannerService` | Collecte des métadonnées GitHub via `WebClient` (dépôts, branches, MR, langages, fichiers). |
+| `CompositeProjectScannerService` | Orchestration multi-forge : délègue vers GitHub ou GitLab selon la configuration. |
+| `DefaultGithubScannerService` / `DefaultGitlabScannerService` | Collecte des métadonnées via `WebClient` (dépôts, branches, MR, langages, fichiers). |
 | `MetadataAnalyzerService` | Associe chaque projet à une stack (Java Spring, Angular, ...) et vérifie la présence des dossiers/fichiers attendus. |
 | `ComplianceCheckerService` | Contrôle le respect du Git Flow et des conventions de branches, détecte la présence d'une chaîne CI. |
 | `ObsolescenceDetectorService` | Compare les versions détectées à la matrice d'obsolescence (YAML). |
@@ -18,7 +19,7 @@ Dashboard Radar est une application batch Spring Boot 3 destinée à être exéc
 
 1. **Job `dashboardRadarJob`** (Spring Batch) : lancé au démarrage, exécute un `Tasklet` unique (`AuditTasklet`).
 2. `AuditTasklet`
-   - Récupère la liste des projets via `GithubScannerService`.
+   - Récupère la liste des projets via `ProjectScanner` (GitHub, GitLab ou les deux).
    - Enrichit chaque `ProjectSnapshot` avec les structures détectées.
    - Applique les contrôles (`ComplianceCheckerService`, `ObsolescenceDetectorService`).
    - Persiste les résultats (`PersistenceService`).
@@ -46,8 +47,10 @@ erDiagram
 
 ## Configuration externe
 
-- **`dashboard.github`** : token et organisation GitHub, taille des pages API.
-- **`dashboard.structure`** : règles par stack (chemins obligatoires, fichiers CI, frameworks autorisés/interdits, langages acceptés).
+- **`dashboard.github` / `dashboard.gitlab`** : credentials et paramètres API pour chaque forge.
+- **`dashboard.sources`** : sélection des providers actifs.
+- **`dashboard.structure`** : règles par stack (chemins obligatoires, fichiers CI, frameworks autorisés/interdits, langages acceptés) chargées depuis `structure/stacks.yml`.
+- **`dashboard.gitflow`** : politique Git Flow externalisée (`config/gitflow.yml`).
 - **`dashboard.obsolescence`** : matrice d'obsolescence (version minimale, dates EOL, sévérité).
 
 ## Déploiement
@@ -55,4 +58,5 @@ erDiagram
 - Image Docker Spring Boot (JDK 17) déployée sur OpenShift.
 - CronJob OpenShift planifié (1 exécution/jour, créneau nocturne).
 - Authentification GitHub par token personnel ou OAuth2 (scope `repo:read`).
+- Authentification GitLab via token personnel (`read_api`).
 - Stratégie de retry via Spring `WebClient` configurable (backoff via `retryWhen` si besoin).

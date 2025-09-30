@@ -1,4 +1,8 @@
 spring:
+  config:
+    import:
+      - optional:classpath:structure/stacks.yml
+      - optional:classpath:config/gitflow.yml
   application:
     name: dashboard-radar
   datasource:
@@ -27,35 +31,13 @@ dashboard:
     organization: ${GITHUB_ORG:}
     base-url: https://api.github.com
     page-size: 100
-  structure:
-    stacks:
-      java-spring:
-        mandatory-paths:
-          - src/main/java
-          - src/main/resources
-          - src/test/java
-        ci-files:
-          - .github/workflows/build.yml
-          - Jenkinsfile
-        forbidden-frameworks:
-          - org.springframework.boot:spring-boot-starter-parent:2.5.0
-        allowed-frameworks:
-          - org.springframework.boot:spring-boot-starter
-        allowed-languages:
-          - java
-      angular:
-        mandatory-paths:
-          - src/app
-          - src/environments
-        ci-files:
-          - .gitlab-ci.yml
-          - .github/workflows/build.yml
-        forbidden-frameworks:
-          - @angular/cli@8
-          - @angular/cli@9
-        allowed-frameworks:
-          - @angular/cli
-        allowed-languages:
-          - typescript
+  gitlab:
+    token: ${GITLAB_TOKEN:}
+    group: ${GITLAB_GROUP:}
+    base-url: https://gitlab.com/api/v4
+    page-size: 100
+    include-subgroups: true
+  sources:
+    enabled-providers: ${SCM_PROVIDERS:github}
   obsolescence:
     matrix-base-path: classpath:obsolescence

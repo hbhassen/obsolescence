@@ -1,0 +1,24 @@
+dashboard:
+  gitflow:
+    required-branches:
+      - main
+      - master
+      - develop
+    allowed-branch-patterns:
+      - main
+      - master
+      - develop
+      - release/.+
+      - feature/.+
+      - hotfix/.+
+      - bugfix/.+
+      - chore/.+
+    protected-branches:
+      - main
+      - master
+      - develop
+    allowed-default-branches:
+      - main
+      - master
+    require-protected-default-branch: true
+    max-branch-inactivity-days: 90
