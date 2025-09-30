@@ -79,8 +79,13 @@ Les propriétés `DB_URL`, `DB_USERNAME`, `DB_PASSWORD` permettent de piloter la
   -Dspring-boot.run.profiles=local \
   -DGITHUB_TOKEN=<token> -DGITHUB_ORG=<organisation> \
   -DGITLAB_TOKEN=<token> -DGITLAB_GROUP=<groupe> \
-  -DSCM_PROVIDERS=github,gitlab
+  -DSCM_PROVIDERS=github,gitlab \
+  -Dspring-boot.run.arguments="--providers=gitlab"
 ```
+
+L'argument `--providers` (ou `--scm-providers`) permet de sélectionner dynamiquement les forges à auditer lors du lancement du
+batch. Les valeurs acceptées sont `github`, `gitlab` ou une liste séparée par des virgules (`github,gitlab`). Si l'argument n'est
+pas fourni, la configuration `dashboard.sources.enabled-providers` reste utilisée.
 
 Le job Spring Batch se lance automatiquement au démarrage et peut être planifié via un CronJob OpenShift dans l'environnement cible.
 
