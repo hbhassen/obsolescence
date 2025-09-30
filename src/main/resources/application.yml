@@ -1,0 +1,79 @@
+spring:
+  application:
+    name: dashboard-radar
+  datasource:
+    url: ${DB_URL:jdbc:h2:mem:dashboard_radar;MODE=PostgreSQL;DATABASE_TO_UPPER=false}
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:}
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  batch:
+    jdbc:
+      initialize-schema: always
+
+logging:
+  level:
+    root: INFO
+    com.example.dashboardradar: DEBUG
+
+dashboard:
+  github:
+    token: ${GITHUB_TOKEN:}
+    organization: ${GITHUB_ORG:}
+    base-url: https://api.github.com
+    page-size: 100
+  structure:
+    stacks:
+      java-spring:
+        mandatory-paths:
+          - src/main/java
+          - src/main/resources
+          - src/test/java
+        ci-files:
+          - .github/workflows/build.yml
+          - Jenkinsfile
+        forbidden-frameworks:
+          - org.springframework.boot:spring-boot-starter-parent:2.5.0
+        allowed-frameworks:
+          - org.springframework.boot:spring-boot-starter
+        allowed-languages:
+          - java
+      angular:
+        mandatory-paths:
+          - src/app
+          - src/environments
+        ci-files:
+          - .gitlab-ci.yml
+          - .github/workflows/build.yml
+        forbidden-frameworks:
+          - @angular/cli@8
+          - @angular/cli@9
+        allowed-frameworks:
+          - @angular/cli
+        allowed-languages:
+          - typescript
+  obsolescence:
+    components:
+      spring-boot:
+        component: spring-boot
+        minimum-version: 3.0.0
+        deprecated-before: 2024-01-01
+        end-of-support: 2025-12-31
+        severity: MAJOR
+      java:
+        component: java
+        minimum-version: 17
+        deprecated-before: 2023-09-01
+        end-of-support: 2026-09-01
+        severity: CRITICAL
+      angular:
+        component: @angular/cli
+        minimum-version: 15.0.0
+        deprecated-before: 2024-05-01
+        end-of-support: 2025-05-01
+        severity: MINOR
