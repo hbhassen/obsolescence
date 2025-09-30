@@ -46,10 +46,10 @@ dashboard:
           - .gitlab-ci.yml
           - .github/workflows/build.yml
         forbidden-frameworks:
-          - @angular/cli@8
-          - @angular/cli@9
+          - "@angular/cli@8"
+          - "@angular/cli@9"
         allowed-frameworks:
-          - @angular/cli
+          - "@angular/cli"
         allowed-languages:
           - typescript
       react:
