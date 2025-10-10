@@ -19,6 +19,7 @@ spring:
   batch:
     jdbc:
       initialize-schema: always
+      table-prefix: batch_
 
 logging:
   level:
