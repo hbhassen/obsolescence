@@ -7,6 +7,7 @@ import com.example.dashboardradar.obsolescence.model.ObsolescenceRule;
 import com.example.dashboardradar.obsolescence.model.ObsolescenceSeverity;
 import com.example.dashboardradar.obsolescence.model.ObsolescenceStatus;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,6 +39,7 @@ public abstract class AbstractYamlObsolescenceDetectorService implements Obsoles
         this.resourcePath = resourcePath;
         this.clock = clock;
         this.yamlMapper = new ObjectMapper(new YAMLFactory());
+        this.yamlMapper.registerModule(new JavaTimeModule());
         loadRules();
     }
 
