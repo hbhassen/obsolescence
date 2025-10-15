@@ -87,7 +87,7 @@ public abstract class AbstractYamlObsolescenceDetectorService implements Obsoles
                 componentName,
                 detectedVersion,
                 rule.minimumVersion(),
-                rule.latestVersion(),
+                rule.latestVersionOptional(),
                 Optional.ofNullable(rule.deprecatedBefore()),
                 Optional.ofNullable(rule.endOfSupport()),
                 rule.severity(),
@@ -132,7 +132,7 @@ public abstract class AbstractYamlObsolescenceDetectorService implements Obsoles
                     detectedVersion,
                     rule.minimumVersion(),
                     rule.severity());
-            case UP_TO_DATE -> rule.latestVersion()
+            case UP_TO_DATE -> rule.latestVersionOptional()
                     .map(latest -> String.format(
                             Locale.ROOT,
                             "%s %s complies with the matrix. Latest known version is %s.",

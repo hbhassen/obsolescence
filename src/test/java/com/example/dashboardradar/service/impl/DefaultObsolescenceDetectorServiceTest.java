@@ -16,7 +16,8 @@ class DefaultObsolescenceDetectorServiceTest {
 
     @Test
     void detectsBelowMinimumVersions() {
-        ObsolescenceMatrixProperties properties = new ObsolescenceMatrixProperties(Map.of(
+        ObsolescenceMatrixProperties properties = new ObsolescenceMatrixProperties();
+        properties.setComponents(Map.of(
                 "spring", new ComponentRule("spring-boot", "3.0.0", "2024-01-01", "2024-12-31", Severity.MAJOR)
         ));
         DefaultObsolescenceDetectorService service = new DefaultObsolescenceDetectorService(properties);

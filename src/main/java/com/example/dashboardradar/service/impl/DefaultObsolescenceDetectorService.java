@@ -25,11 +25,11 @@ public class DefaultObsolescenceDetectorService implements ObsolescenceDetectorS
 
     @Override
     public ObsolescenceReport detect(ProjectSnapshot snapshot) {
-        if (properties.components() == null || properties.components().isEmpty()) {
+        if (properties.getComponents() == null || properties.getComponents().isEmpty()) {
             return new ObsolescenceReport(List.of());
         }
         List<ComponentStatus> statuses = new ArrayList<>();
-        for (ComponentRule rule : properties.components().values()) {
+        for (ComponentRule rule : properties.getComponents().values()) {
             String currentVersion = resolveVersion(snapshot, rule.component());
             String status = evaluateStatus(rule, currentVersion);
             statuses.add(new ComponentStatus(
