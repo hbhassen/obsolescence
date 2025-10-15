@@ -70,7 +70,7 @@ dashboard:
     components: # matrice d'obsolescence (version minimale, dates de fin de support)
 ```
 
-Les propriétés `DB_URL`, `DB_USERNAME`, `DB_PASSWORD` permettent de piloter la connexion base (par défaut H2 en mémoire pour le développement ; dialecte PostgreSQL pour le déploiement).
+Les propriétés Spring standard (`SPRING_DATASOURCE_URL`, `SPRING_DATASOURCE_USERNAME`, `SPRING_DATASOURCE_PASSWORD`) permettent de piloter la connexion base (par défaut H2 en mémoire pour le développement). L'application embarque une configuration H2 (`jdbc:h2:mem:dashboard_radar`) adaptée aux tests : dialecte H2, création automatique du schéma Spring Batch et journalisation des requêtes JPA (`spring.jpa.show-sql=true`).
 
 ## Lancement local
 

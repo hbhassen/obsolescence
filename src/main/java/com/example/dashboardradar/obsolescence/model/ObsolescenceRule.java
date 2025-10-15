@@ -12,7 +12,7 @@ public record ObsolescenceRule(
         @JsonProperty("end-of-support") LocalDate endOfSupport,
         ObsolescenceSeverity severity) {
 
-    public Optional<String> latestVersion() {
+    public Optional<String> latestVersionOptional() {
         return Optional.ofNullable(latestVersion);
     }
 }
